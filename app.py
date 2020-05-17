@@ -49,6 +49,35 @@ data_penjualan = invoices.dropna()
 
 app = Flask(__name__) 
 
+@app.route("/docs")
+def documentation():
+    return '''
+        <h1> Documentation </h1>
+        <h2> Static Endpoints </h2>
+        <ol>
+            <li>
+                <p> / , method = GET </p>
+                <p> Base Endpoint, returning welcoming string value. </p>
+            </li>
+        </ol>
+         
+        <h2> Dynamic Endpoints </h2>
+        <ol start = "2">
+            <li>
+                <p> /data/get/&lt;data_name> , method = GET </p>
+                <p> Return full data &lt;data_name&gt; in JSON format. Currently available data are: </p>
+                <ul style="list-style-type:disc;">
+                    <li> books_c.csv </li>
+                    <li> pulsar_stars.csv </li>
+                </ul>
+            </li>
+ 
+            <li>
+                <p> /data/get/equal/&lt;data_name&gt;/&lt;column&gt;/&lt;value&gt; , method = GET </p>
+                <p> Return all &lt;data_name&gt; where the value of column &lt;column&gt; is equal to &lt;value&gt; </p>
+            </li>
+        </ol>'''
+
 # mendapatkan keseluruhan daftar lagu
 @app.route('/data/get/catalog', methods=['GET']) 
 def get_catalog(): 
@@ -106,8 +135,5 @@ def penjualan():
         return (data_penjualan.query(data_filter)[cols].to_json())
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     app.run(debug=True, port=5000) 
-=======
-    app.run(debug=True) 
->>>>>>> 021c3bcb5f077a4ab46703ff531a74744f2dda0c
+
