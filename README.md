@@ -1,5 +1,5 @@
 # Capstone Project API
-Capstone project API sebagai tugas dalam training Python for Data Analysis
+Capstone project API sebagai tugas dalam training Python for Data Analysis dari Algoritma
 
 Untuk membuka halaman menggunakan URL : https://hidayat-capstone-api.herokuapp.com
 
