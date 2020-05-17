@@ -106,4 +106,8 @@ def penjualan():
         return (data_penjualan.query(data_filter)[cols].to_json())
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True, port=5000) 
+=======
+    app.run(debug=True) 
+>>>>>>> 021c3bcb5f077a4ab46703ff531a74744f2dda0c
