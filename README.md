@@ -19,4 +19,4 @@ Filter yang dapat digunakan:
 * country : memfilter data penjualan berdasarkan negara, contoh: /data/get/penjualan?country=Germany
 * genre : memfilter data penjualan berdasarkan genre musik, contoh: /data/get/penjualan?genre=Rock
 * col : memfilter kolom yang ingin ditampilkan, contoh: /data/get/penjualan?col=[Song,Artist,Quantity]
-Untuk mengkombinasikan filter dapat digunakan tanda &, contoh: /data/get/penjualan?year=2012&genre=Rock
+* Untuk mengkombinasikan filter dapat digunakan tanda &, contoh: /data/get/penjualan?year=2012&genre=Rock
