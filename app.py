@@ -49,6 +49,10 @@ data_penjualan = invoices.dropna()
 
 app = Flask(__name__) 
 
+@app.route('/')
+def welcome():
+    return '''<h1> Selamat Datang </h1>'''
+
 @app.route("/docs")
 def documentation():
     return '''
@@ -57,24 +61,42 @@ def documentation():
         <ol>
             <li>
                 <p> / , method = GET </p>
-                <p> Base Endpoint, returning welcoming string value. </p>
+                <p> Base Endpoint, ucapan selamat datang. </p>
+            </li>
+            <li>
+                <p> /data/get/catalog , method = GET </p>
+                <p> Mendapatkan seluruh daftar lagu yang tersedia. </p>
+            </li>
+            <li>
+                <p> /data/get/top10_songs , method = GET </p>
+                <p> Mendapatkan daftar 10 lagu dengan penjualan terbanyak. </p>
+            </li>
+            <li>
+                <p> /data/get/top10_artists , method = GET </p>
+                <p> Mendapatkan daftar 10 penyanyi dengan penjualan lagu terbanyak. </p>
             </li>
         </ol>
          
         <h2> Dynamic Endpoints </h2>
-        <ol start = "2">
+        <ol start = "5">
             <li>
-                <p> /data/get/&lt;data_name> , method = GET </p>
-                <p> Return full data &lt;data_name&gt; in JSON format. Currently available data are: </p>
+                <p> /data/get/penjualan , method = GET </p>
+                <p> Menampilkan seluruh data penjualan </p>
+                <p> Filter yang dapat digunakan : </p>
                 <ul style="list-style-type:disc;">
-                    <li> books_c.csv </li>
-                    <li> pulsar_stars.csv </li>
+                    <li> year : memfilter data penjualan berdasarkan tahun penjualan, contoh:
+                        /data/get/penjualan?year=2012</li>
+                    <li> day : memfilter data penjualan berdasarkan nama hari (in english), contoh:
+                        /data/get/penjualan?day=Wednesday</li>
+                    <li> country : memfilter data penjualan berdasarkan negara, contoh:
+                        /data/get/penjualan?country=Germany</li>
+                    <li> genre : memfilter data penjualan berdasarkan genre musik, contoh:
+                        /data/get/penjualan?genre=Rock</li>
+                    <li> col : memfilter kolom yang ingin ditampilkan, contoh:
+                        /data/get/penjualan?col=[Song,Artist,Quantity]</li>
                 </ul>
-            </li>
- 
-            <li>
-                <p> /data/get/equal/&lt;data_name&gt;/&lt;column&gt;/&lt;value&gt; , method = GET </p>
-                <p> Return all &lt;data_name&gt; where the value of column &lt;column&gt; is equal to &lt;value&gt; </p>
+                <p> Untuk mengkombinasikan filter dapat digunakan tanda &amp, contoh:
+                    /data/get/penjualan?year=2012&genre=Rock </p>
             </li>
         </ol>'''
 
@@ -99,7 +121,7 @@ def penjualan():
     params = request.args
     
     year = params.get('year')
-    weekday = params.get('weekday')
+    day = params.get('day')
     country = params.get('country')
     genre = params.get('genre')
     col = params.get('col')
@@ -113,7 +135,7 @@ def penjualan():
         column.append('InvoiceYear')
         equal.append('==')
         condition.append(int(year))
-    if weekday:
+    if day:
         column.append('Weekday')
         equal.append('==')
         condition.append(weekday)
