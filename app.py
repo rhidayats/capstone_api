@@ -129,7 +129,7 @@ def penjualan():
     column = []
     equal = []
     condition = []
-    if (year==None) & (weekday==None) & (country==None) & (genre==None):
+    if (year==None) & (day==None) & (country==None) & (genre==None):
         return (data_penjualan.to_json())
     if year:
         column.append('InvoiceYear')
@@ -138,7 +138,7 @@ def penjualan():
     if day:
         column.append('Weekday')
         equal.append('==')
-        condition.append(weekday)
+        condition.append(day)
     if country:
         column.append('Country')
         equal.append('==')
